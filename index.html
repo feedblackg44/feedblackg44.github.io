@@ -1,21 +1,132 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>ECampus KPI</title>
-    </head>
+    <meta charset="utf-8">
+    <title>
+        1 бригада: отчет
+    </title>
+
+    <style>
+        .fig {
+            text-align: center; 
+        }
+        .frame {
+            vertical-align: top;
+            display:inline-block;
+            width: 950px; 
+            height: 480px;
+        }
+        .content {
+            position: relative;
+            text-align: center;
+            width: 1280px;
+            margin: 0 auto;
+        }
+        .divbuttons {
+            vertical-align: top;
+            display:inline-block;
+            width: 320px;
+            height: 480px;
+        }
+        .divbutton {
+            text-align: center;
+            width: 320px;
+            height: 120px;
+        }
+        .onebutton {
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+    
+    <style>
+        table {
+            border: 1px solid rgb(188, 233, 245); 
+            margin: auto; 
+        } td {
+            text-align: center;
+        }
+   </style>
+
     <body>
-        <h1 align="center">ECampus KPI</h1>
-        <table border="1" align="center">
+        
+        <p class="fig"><img src="images/stuff.jpeg" width = "250" height="250"> </p>
+        <p class="fig" style="color:#1a4764"> <b>Бригада №1</b> </p>
+
+        <p class="fig"><table border="Students" align="center"></p>
             <tr>
-                <th width="110">Розклад</th>
-                <th width="110">Список усіх предметів</th>
-                <th width="110">Оголошення</th>
-                <th width="110">Поточний контроль</th>
-                <th width="110">Сесія</th>
-                <th width="110">Результати атестації</th>
-                <th width="110">Мій профіль</th>
+                <th width="300" valign="top">
+                    <details>
+                        <summary>Василик Арсеній</summary>
+                        <p><img src="images/senya.jpg" width = "150" height="210"></p>
+                        <p> Василик Арсеній // IС-02 // Бригада №1 </p>
+                        <p> Математика - 192 </p>
+                        <p> Українська - 195 </p>
+                        <p> Англійська - 179 </p>
+                    </details>
+                </th>
+                <th width="300" valign="top">
+                    <details>
+                        <summary>Майстренко Соня</summary>
+                        <p><img src="images/sonya.jpg" width = "150" height="210"></p>
+                        <p> Майстренко Соня // IС-02 // Бригада №1 </p>
+                        <p> Математика - 191 </p>
+                        <p> Українська - 191 </p>
+                        <p> Англійська - 198 </p>
+                    </details>
+                </th>
+                <th width="300" valign="top">
+                    <details>
+                    <summary>Плостак Ілля</summary>
+                        <p><img src="images/illia.jpg" width = "150" height="210"></p>
+                        <p> Плостак Ілля // IС-02 // Бригада №1 </p>
+                        <p> Математика - 196 </p>
+                        <p> Українська - 185 </p>
+                        <p> Фізика - 188 </p>
+                    </details>
+                </th>
             </tr>
         </table>
+
+        <p class="fig"><table border="Labs" width="1280"></p>
+            <tr>
+                <th>Лабораторна робота №1</th>
+                <th>Лабораторна робота №2</th>
+                <th>Лабораторна робота №3</th>
+                <th>Лабораторна робота №4</th>
+                <th>Лабораторна робота №5</th>
+                <th>Лабораторна робота №6</th>
+                <th>Лабораторна робота №7</th>
+                <th>Лабораторна робота №8</th>
+                <th>Лабораторна робота №9</th>
+            </tr>
+        </table>
+        <br>
+        <div class="content">
+            <div class="divbuttons">
+                <div class="divbutton"><button class="onebutton" onClick="opis()">Опис предметного середовища</button></div>
+                <div class="divbutton"><button class="onebutton" onClick="theme()">Тема. Мета. Місце розташування лаби №1</button></div>
+                <div class="divbutton"><button class="onebutton" onClick="structure()">Структура документа</button></div>
+                <div class="divbutton"><button class="onebutton" onClick="vivod()">Висновок</button></div>
+            </div>
+            <div class="frame">
+                <iframe id="frame1" src="./lab1/opis.html" width="950" height="480">
+                </iframe>
+            </div>
+        </div>
+        <br>
+        <script>
+            function opis() {
+                document.getElementById("frame1").src = "./lab1/opis.html"
+            }
+            function theme() {
+                document.getElementById("frame1").src = "./lab1/theme.html"
+            }
+            function structure() {
+                document.getElementById("frame1").src = "./lab1/structure.html"
+            }
+            function vivod() {
+                document.getElementById("frame1").src = "./lab1/vivod.html"
+            }
+        </script>
     </body>
 </html>
