@@ -30,6 +30,7 @@
     text-align: center;
     vertical-align: top;
     border: 1px solid black;
+    z-index: 1;
 }
 .item {
     position: relative;
