@@ -8,71 +8,97 @@
         </title>
     </head>
     <body>
-        <p class="fig"><img src="images/stuff.jpeg" width = "250" height="250"> </p>
-        <p class="fig" style="color:#1a4764"> <b>Бригада №1</b> </p>
-
-        <p class="fig"><table border="Students" align="center">
-            <tr>
-                <th width="300" valign="top">
-                    <details>
-                        <summary>Василик Арсеній</summary>
-                        <p><img src="images/senya.jpg" width = "150" height="210"></p>
-                        <p> Василик Арсеній // IС-02 // Бригада №1 </p>
-                        <p> Математика - 192 </p>
-                        <p> Українська - 195 </p>
-                        <p> Англійська - 179 </p>
-                    </details>
-                </th>
-                <th width="300" valign="top">
-                    <details>
-                        <summary>Майстренко Соня</summary>
-                        <p><img src="images/sonya.jpg" width = "150" height="210"></p>
-                        <p> Майстренко Соня // IС-02 // Бригада №1 </p>
-                        <p> Математика - 191 </p>
-                        <p> Українська - 191 </p>
-                        <p> Англійська - 198 </p>
-                    </details>
-                </th>
-                <th width="300" valign="top">
-                    <details>
-                    <summary>Плостак Ілля</summary>
-                        <p><img src="images/illia.jpg" width = "150" height="210"></p>
-                        <p> Плостак Ілля // IС-02 // Бригада №1 </p>
-                        <p> Математика - 196 </p>
-                        <p> Українська - 185 </p>
-                        <p> Фізика - 188 </p>
-                    </details>
-                </th>
-            </tr>
-        </table>
-
-        <p class="fig"><table border="Labs" width="1280">
-            <tr>
-                <th>Лабораторна робота №1</th>
-                <th>Лабораторна робота №2</th>
-                <th>Лабораторна робота №3</th>
-                <th>Лабораторна робота №4</th>
-                <th>Лабораторна робота №5</th>
-                <th>Лабораторна робота №6</th>
-                <th>Лабораторна робота №7</th>
-                <th>Лабораторна робота №8</th>
-                <th>Лабораторна робота №9</th>
-            </tr>
-        </table>
-        <br>
-        <div class="content">
-            <div class="divbuttons">
-                <div class="divbutton"><button class="onebutton" onClick="opis()">Опис предметного середовища</button></div>
-                <div class="divbutton"><button class="onebutton" onClick="theme()">Тема. Мета. Місце розташування лаби №1</button></div>
-                <div class="divbutton"><button class="onebutton" onClick="structure()">Структура документа</button></div>
-                <div class="divbutton"><button class="onebutton" onClick="vivod()">Висновок</button></div>
-            </div>
-            <div class="frame">
-                <iframe id="frame1" src="./lab1/opis.html" width="950" height="480">
-                </iframe>
+        <div class="main">
+            <div class="body">
+                <div class="center"><img src="images/stuff.jpeg" width = "250" height="250"></div>
+                <div class="center" style="color:#1a4764"><b>Бригада №1</b></div>
+                <br>
+                <div class="table">
+                    <div class="student">
+                        <details>
+                            <summary>Василик Арсеній</summary>
+                            <div class="info">
+                                <br>
+                                <div><img src="images/senya.jpg" width = "150" height="210"></div>
+                                <br>
+                                <div> Василик Арсеній // IС-02</div>
+                                <br>
+                                <div> Математика - 192 </div>
+                                <div> Українська - 195 </div>
+                                <div> Англійська - 179 </div>
+                                <br>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="student">
+                        <details>
+                            <summary>Майстренко Соня</summary>
+                            <div class="info">
+                                <br>
+                                <div><img src="images/sonya.jpg" width = "150" height="210"></div>
+                                <br>
+                                <div> Майстренко Соня // IС-02</div>
+                                <br>
+                                <div> Математика - 191 </div>
+                                <div> Українська - 191 </div>
+                                <div> Англійська - 198 </div>
+                                <br>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="student">
+                        <details>
+                        <summary>Плостак Ілля</summary>
+                            <div class="info">
+                                <br>
+                                <div><img src="images/illia.jpg" width = "150" height="210"></div>
+                                <br>
+                                <div> Плостак Ілля // IС-02 </div>
+                                <br>
+                                <div> Математика - 196 </div>
+                                <div> Українська - 185 </div>
+                                <div> Фізика - 188 </div>
+                                <br>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <br>
+                <div class="table" style="border: 1px solid black; padding: 3px 0px 3px 0px;">
+                    <div class="item">Лабораторна робота №1</div>
+                    <div class="item">Лабораторна робота №2</div>
+                    <div class="item">Лабораторна робота №3</div>
+                    <div class="item">Лабораторна робота №4</div>
+                    <div class="item">Лабораторна робота №5</div>
+                    <div class="item">Лабораторна робота №6</div>
+                    <div class="item">Лабораторна робота №7</div>
+                    <div class="item">Лабораторна робота №8</div>
+                    <div class="item">Лабораторна робота №9</div>
+                </div>
+                <br>
+                <div class="content">
+                    <div class="divbuttons">
+                        <div class="divbutton">
+                            <div class="onebutton"
+                                 onClick="opis()">Опис предметного середовища</div></div>
+                        <div class="divbutton">
+                            <div class="onebutton"
+                                 onClick="theme()">Тема. Мета. Місце розташування лаби №1</div></div>
+                        <div class="divbutton">
+                            <div class="onebutton"
+                                 onClick="structure()">Структура документа</div></div>
+                        <div class="divbutton">
+                            <div class="onebutton"
+                                 onClick="vivod()">Висновок</div></div>
+                    </div>
+                    <div class="frame">
+                        <iframe id="frame1" src="./lab1/opis.html" width="950" height="480">
+                        </iframe>
+                    </div>
+                </div>
+                <br>
+                <script src="./js/script.js"></script>
             </div>
         </div>
-        <br>
-        <script src="./js/script.js"></script>
     </body>
 </html>

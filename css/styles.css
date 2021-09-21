@@ -1,15 +1,47 @@
-table {
-    border: 1px solid rgb(188, 233, 245);
-    margin: auto;
-} td {
-      text-align: center;
+.main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
-.fig {
+.body {
+    min-width: 1280px;
+    width: 1280px;
+    position: relative;
+    height: auto;
+    margin: 0 auto;
+}
+.center {
     text-align: center;
+}
+.table {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.info {
+    background: aliceblue;
+    border: 1px solid black;
+}
+.student {
+    position: relative;
+    display: inline-block;
+    width: 20%;
+    height: 20px;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid black;
+}
+.item {
+    position: relative;
+    display: inline-block;
+    width: 10.6%;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid black;
 }
 .frame {
     vertical-align: top;
-    display:inline-block;
+    display: inline-block;
     width: 950px;
     height: 480px;
 }
@@ -17,20 +49,26 @@ table {
     position: relative;
     text-align: center;
     width: 1280px;
+    height: 480px;
     margin: 0 auto;
 }
 .divbuttons {
+    position: relative;
     vertical-align: top;
-    display:inline-block;
+    display: inline-block;
     width: 320px;
-    height: 480px;
+    height: 100%;
+    border: 1px solid black;
 }
 .divbutton {
-    text-align: center;
-    width: 320px;
-    height: 120px;
+    height: 99px;
+    padding: 10px 10px 10px 10px;
 }
 .onebutton {
-    width: 300px;
     height: 100px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+    background: lightgray;
 }
