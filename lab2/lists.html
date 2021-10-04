@@ -7,11 +7,105 @@
 
     <style>
         #center {text-align: center;}
+        .center {text-align: left; width: 750px; margin-left: 100px}
     </style>
 
     <body>
-        <div id="center"><h1>Списки</h1>
-        <br>Використання у нашому проєкті(списки реалізовано div-ами):</div>
+        <div style="text-align: center"><h1>Списки</h1></div>
+        <div class="center">
+            Маркерований список:
+            <ul>
+                <li>Microsoft</li>
+                <li>Google</li>
+                <li>Apple</li>
+                <li>Xiaomi</li>
+            </ul>
+            Код:
+            <xmp>
+                <ul>
+                    <li>Microsoft</li>
+                    <li>Google</li>
+                    <li>Apple</li>
+                    <li>Xiaomi</li>
+                </ul>
+            </xmp>
+            Нумерований список:
+            <ol>
+                <li>Microsoft</li>
+                <li>Google</li>
+                <li>Apple</li>
+                <li>Xiaomi</li>
+            </ol>
+            Код:
+            <xmp>
+                <ol>
+                    <li>Microsoft</li>
+                    <li>Google</li>
+                    <li>Apple</li>
+                    <li>Xiaomi</li>
+                </ol>
+            </xmp>
+            Список визначеннь:
+            <dl>
+                <dt>A-Brands:</dt>
+                <dd>Apple</dd>
+                <dd>Samsung</dd>
+                <dt>B-Brands:</dt>
+                <dd>Xiaomi</dd>
+                <dd>Huawei</dd>
+                <dd>OnePlus</dd>
+            </dl>
+            Код:
+            <xmp>
+                <dl>
+                    <dt>A-Brands:</dt>
+                    <dd>Apple</dd>
+                    <dd>Samsung</dd>
+                    <dt>B-Brands:</dt>
+                    <dd>Xiaomi</dd>
+                    <dd>Huawei</dd>
+                    <dd>OnePlus</dd>
+                </dl>
+            </xmp>
+            Вкладені списки:
+            <ul>
+                <li>Пункт 1.</li>
+                <li>Пункт 2.
+                    <ul>
+                        <li>Подпункт 2.1.</li>
+                        <li>Подпункт 2.2.
+                            <ul>
+                                <li>Подпункт 2.2.1.</li>
+                                <li>Подпункт 2.2.2.</li>
+                            </ul>
+                        </li>
+                        <li>Подпункт 2.3.</li>
+                    </ul>
+                </li>
+                <li>Пункт 3.</li>
+            </ul>
+            Код:
+            <xmp>
+                <ul>
+                    <li>Пункт 1.</li>
+                    <li>Пункт 2.
+                        <ul>
+                            <li>Подпункт 2.1.</li>
+                            <li>Подпункт 2.2.
+                                <ul>
+                                    <li>Подпункт 2.2.1.</li>
+                                    <li>Подпункт 2.2.2.</li>
+                                </ul>
+                            </li>
+                            <li>Подпункт 2.3.</li>
+                        </ul>
+                    </li>
+                    <li>Пункт 3.</li>
+                </ul>
+            </xmp>
+        </div>
+
+        <div id="center">Використання у нашому проєкті(списки реалізовано div-ами):</div>
         <xmp>
             <div class="element">
                 <a href="index.php">Головна</a></div>
