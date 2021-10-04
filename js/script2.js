@@ -16,3 +16,6 @@ function swimming() {
 function selectors() {
     document.getElementById("frame1").src = "./selectors.html"
 }
+function vivod() {
+    document.getElementById("frame1").src = "./vivod.html"
+}
