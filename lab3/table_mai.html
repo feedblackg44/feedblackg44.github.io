@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<style>
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .layout {
+        height: 100%;
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    .header{
+        background:rgb(255, 230, 0);
+        width:2000px;
+        height:100px;
+    }
+
+    .tableInHeader{
+        width: 30%;
+        height: 50%;
+        border-spacing: 0;
+        margin-left: 2%;
+    }
+
+    .footer{
+        background:rgb(255, 230, 0);
+        width:715px;
+        height:100px;
+    }
+
+    .blueblock {
+        background:darkblue;
+        width:80px;
+        height:300px;
+    }
+
+    .whiteblockHeader {
+        width: 30%;
+        height: 50%;
+        border-spacing: 0;
+        margin-left: 2%;
+    }
+
+    .whiteblock {
+        background-color: rgb(255, 255, 255);
+        border: 2px black solid
+    }
+
+    .blueblockSide {
+        width: 20%;
+        background: rgb(51, 105, 155);
+        border-right: black 2px solid;
+
+    }
+
+    .whiteblockCenter {
+        width: 80%;
+        background: rgb(255, 255, 255);
+    }
+
+    .redblockCenter{
+        width: 96%;
+        height: 10%;
+        border-spacing: 0;
+        margin-left: 2%;
+    }
+
+    .redblock{
+        background-color: rgb(233, 115, 115);
+        border: 2px black solid
+    }
+
+    .delim {
+        width: 100%;
+        height: 3%;
+        border-spacing: 0;
+    }
+
+    .delim2 {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .whiteinwhite {
+        width: 96%;
+        height: 70%;
+        border-spacing: 0;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .whitedel2 {
+        width: 4%;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .bluteinwhite2 {
+        background-color: rgb(51, 105, 155);
+        border: 2px black solid
+    }
+
+    .whiteinwhite2 {
+        width: 56%;
+        background-color: rgb(255, 255, 255);
+        border: 2px black solid
+    }
+
+</style>
+
+<head>
+    <meta charset = "UTF-8">
+    <title>3 лаба</title>
+</head>
+
+<body>
+<table class = "layout">
+    <tr>
+        <td class = "header" colspan = "7">
+            <table class = "whiteblockHeader">
+                <tr>
+                    <td class = "whiteblock"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class = "blueblockSide"><td>
+        <td class = "whiteblockCenter">
+            <table class = "redblockCenter">
+                <tr>
+                    <td class = "redblock"></td>
+                </tr>
+            </table>
+            <table class = "delim">
+                <tr>
+                    <td class = "delim2"></td>
+                </tr>
+            </table>
+            <table class = "whiteinwhite">
+                <tr>
+                    <td class = "whiteinwhite2"></td>
+                    <td class = "whitedel2"></td>
+                    <td class = "bluteinwhite2"></td>
+                </tr>
+            </table>
+
+        </td>
+
+    </tr>
+    <tr>
+        <td class = "footer" colspan  = "7"></td>
+    </tr>
+
+</table>
+</body>
+</html>
