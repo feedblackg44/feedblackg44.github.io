@@ -1,0 +1,64 @@
+.t1 {
+    width: 460px;
+    height: 75px;
+    background: yellow;
+    border-spacing: 30px 23px;
+    border: 1px solid black;
+}
+.td1 {
+    width: 45%;
+    background: white;
+    border: 1px solid black;
+}
+.t2 {
+    width: 460px;
+    height: 300px;
+    background: white;
+    border-spacing: 0px 0px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.td2 {
+    width: 26%;
+    background: dodgerblue;
+    border-right: 1px solid black;
+}
+.td3 {
+    width: 39%;
+    background: white;
+}
+.t4 {
+    height: 90%;
+    width: 100%;
+    padding-left: 10%;
+    border-spacing: 0px 0px;
+}
+.td5 {
+    height: 85%;
+    border: 1px solid black;
+}
+.td6 {
+    height: 15%;
+    border: 1px solid black;
+    border-top: 0px;
+    background: red;
+}
+.td4 {
+    width: 35%;
+    background: white;
+}
+.t5 {
+    height: 100%;
+    width: 100%;
+    border-spacing: 15px 15px;
+}
+.td7 {
+    background: dodgerblue;
+    border: 1px solid black;
+}
+.t3 {
+    width: 460px;
+    height: 75px;
+    background: yellow;
+    border: 1px solid black;
+}
