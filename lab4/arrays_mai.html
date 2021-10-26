@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Заголовок Страницы</title>
+</head>
+<body>
+    <xmp>
+        let arr = [];
+        var sum = 0;
+        var multiplying = 1;
+        var indexOfMax = 0;
+        var indexOfMin = 0;
+        let temp = 0;
+
+        result = prompt("Enter the number of elements:");
+
+        for (let i = 0; i < result; i++){
+            var j = randomNum(-100, 100);
+            arr[i] = j;
+        }
+        for (let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+            if (i%2 == 0){
+                sum = arr[i] + sum;
+            }
+            if (arr[i] < 0) {
+                multiplying = arr[i] * multiplying;
+            }
+        }
+
+        console.log("Your sum is: " + sum);
+        console.log("Your multyplying is: " + multiplying)
+        console.log("Your max number: " + maxElement(arr));
+        console.log("The index of your max number: " + indexOfMax);
+        console.log("Your min number: " + minElement(arr));
+        console.log("The index of your min number: " + indexOfMin);
+        console.log(bubbleSort(arr));
+
+        function randomNum(min, max){
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random()*(max - min)) + min
+        }
+
+        function maxElement(arr){
+            var max = arr[0];
+            for (let i = 0; i < arr.length; i++){
+                if (arr[i] > max){
+                    max = arr[i];
+                    indexOfMax = i;
+                }
+            }
+
+            return max;
+        }
+
+        function minElement(arr){
+            var min = arr[0];
+            for (let i = 0; i < arr.length; i++){
+                if (i%2 == 1) {
+                    if (arr[i] < min){
+                        min = arr[i];
+                        indexOfMin = i;
+                    }
+                }
+            }
+
+            return min;
+        }
+
+        function bubbleSort(arr){
+            for (let i = 0; i < arr.length; i++){
+                for (let j = 0; j < arr.length; j++){
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+    </xmp>
+</body>
+</html>
