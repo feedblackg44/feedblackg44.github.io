@@ -53,8 +53,16 @@
         }
         function doTask()
         {
-            var A = [28, 11, 49, 57, 89, 56, 6, 92, 12, 55];
-            var B = [56, 74, 49, 85, 82, 79, 6, 64, 61, 53];
+            var A = [];
+            for (var i=0, t=10; i<t; i++)
+            {
+                A.push(Math.round(Math.random() * t))
+            }
+            var B = [];
+            for (var i=0, t=10; i<t; i++)
+            {
+                B.push(Math.round(Math.random() * t))
+            }
             document.getElementById("arrays").innerHTML = "Масив А:<br>" + A + "<br>" +
                                                           "Масив B:<br>" + B + "<br>";
 
