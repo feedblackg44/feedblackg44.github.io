@@ -20,25 +20,25 @@
     border: 1px solid black;
 }
 .divbutton {
-    height: 64px;
+    height: 76px;
     padding: 10px 10px 10px 10px;
 }
 .onebutton {
-    height: 64px;
+    height: 76px;
     border: 1px solid black;
     text-align: center;
     vertical-align: middle;
-    line-height: 64px;
+    line-height: 76px;
     background: lightgray;
 }
 .twobuttons {
     display: inline-block;
-    height: 64px;
+    height: 76px;
     width: 48%;
     border: 1px solid black;
     text-align: center;
     vertical-align: middle;
-    line-height: 32px;
+    line-height: 38px;
     background: lightgray;
 }
 .onebutton:hover {
