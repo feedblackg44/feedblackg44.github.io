@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            resize: none;
+        }
+    </style>
+    <script>
+        function bold()
+        {
+            var textarea = document.getElementById("text");
+            if(textarea.style.fontWeight == "bolder")
+            {
+                textarea.style.fontWeight = "normal";
+            }
+            else
+            {
+                textarea.style.fontWeight = "bolder";
+            }
+        }
+        function italic()
+        {
+            var textarea = document.getElementById("text");
+            if(textarea.style.fontStyle == "italic")
+            {
+                textarea.style.fontStyle = "normal";
+            }
+            else
+            {
+                textarea.style.fontStyle = "italic";
+            }
+        }
+        function underline()
+        {
+            var textarea = document.getElementById("text");
+            if(textarea.style.textDecoration == "underline")
+            {
+                textarea.style.textDecoration = "none";
+            }
+            else
+            {
+                textarea.style.textDecoration = "underline";
+            }
+        }
+        function changecolor()
+        {
+            var textarea = document.getElementById("text");
+            var color = document.getElementById("input").value;
+            textarea.style.color = "#" + color;
+        }
+        function changeregister()
+        {
+            var textarea = document.getElementById("text").value;
+            var out = "";
+            for (var i = 0; i < textarea.length; i++)
+            {
+                var temp = textarea.charAt(i);
+                if (temp == temp.toLowerCase())
+                {
+                    out += temp.toUpperCase();
+                }
+                else
+                {
+                    out += temp.toLowerCase();
+                }
+            }
+            document.getElementById("text").value = out;
+        }
+    </script>
+</head>
+<body>
+    <input type="button" onClick="bold()" value="Напівжирність"/>
+    <input type="button" onClick="italic()" value="Нахил"/>
+    <input type="button" onClick="underline()" value="Підкреслювання"/>
+    <input type="button" onClick="changeregister()" value="Змінити регістр"/><br><br>
+    <input type="button" onClick="changecolor()" value="Змінити колір"/>
+    <input type="text" id="input" value=""/>
+    <br>
+    <br>
+    <textarea id="text"></textarea>
+</body>
+</html>
