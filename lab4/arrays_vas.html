@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+    <script>
+    function getRandom(min, max) 
+    {
+    return Math.floor(Math.random() * (max - min) + min);
+    }
+    function sumOfElemEvenInd(arr)
+    {
+        var S = 0;
+        for(var i=0; i<arr.length; i++)
+            {
+                if(i%2==0&&i!=0)
+                S+=arr[i];
+            }
+        return S;
+    }
+    function sumOfNegativeElem(arr)
+    {
+        var S = 0;
+        for(var i=0; i<arr.length; i++)
+            {
+                if(arr[i]<0)
+                S+=arr[i];
+            }
+        return S;
+    }
+    function findMaxPositiveNumber(arr)
+    {
+        let temp = [];
+        var temp1 = arr[0];
+        var temp2 = 0;
+        for(var i = 0; i<arr.length; i++)
+            {
+                if(arr[i]>0 && arr[i]>temp1)
+                {
+                    temp1 = arr[i];
+                    temp2 = i;
+                }
+            }
+            temp.push(temp1);
+            temp.push(temp2);
+            return temp;
+    }
+    function findMinElementOddInd(arr)
+    {
+        let temp = [];
+        var temp1 = arr[0];
+        var temp2 = 0;
+        for(var i = 0; i < arr.length; i++)
+            {
+                if(i%2!=0 && arr[i]<temp1)
+                {
+                    temp1 = arr[i];
+                    temp2 = i;
+                }
+            }
+            temp.push(temp1);
+            temp.push(temp2);
+            return temp;
+    }
+    function bubble(arr) 
+    {
+      var len = arr.length;   
+      for (var i = 0; i < len ; i++)
+        {
+            for(var j = 0 ; j < len - i - 1; j++)
+                { 
+                    if (arr[j] > arr[j + 1]) 
+                    {
+                        var temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j + 1] = temp;
+                    }
+                }
+        }
+      return arr;
+    }
+
+    var n = prompt("Enter the length of the array");
+    document.write(n + "<br>");
+    let array = [];
+    for(var i = 0; i < n; i++)
+        {
+            array.push(getRandom(-100,100));
+        }
+    for(var i = 0; i < n; i++)
+        {
+            document.write(array[i] + " " );
+        }
+    document.write("<br>");
+    document.write("The sum of elems with even index is " + sumOfElemEvenInd(array) + "<br>");
+    document.write("The sum of negative elems is " + sumOfNegativeElem(array) + "<br>");
+    var tempArr = findMaxPositiveNumber(array);
+    document.write("The biggest posistive number is " + tempArr[0] + " and his index is " + tempArr[1] + "<br>");
+    tempArr.pop();
+    tempArr.pop();
+    tempArr = findMinElementOddInd(array);
+    document.write("The smallest number is " + tempArr[0] + " and his index is " + tempArr[1] + "<br>");
+    bubble(array);
+    for(var i = 0; i < n; i++)
+        {
+            document.write(array[i] + " " );
+        }
+    </script>
+</body>
+</html>
