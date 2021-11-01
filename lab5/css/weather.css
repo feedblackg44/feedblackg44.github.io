@@ -1,0 +1,39 @@
+/*body {
+	font: 16px Arial, Helvetica, sans-serif;
+	margin: 0;
+}*/
+
+.weather-wrapper {
+	background: skyblue;
+	padding: 40px 20px;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	min-width: 210px;
+	width: 210px;
+	position: relative;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+p {
+	text-align: center;
+}
+
+strong {
+	color: steelblue;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.hide {
+	display: none;
+}

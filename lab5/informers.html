@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/js/openweather.js"></script>
+    <link rel="stylesheet" href="./css/weather.css" />
+
+    <link rel="stylesheet" href="./css/infoCurrency.css" />
+
+    <link rel="stylesheet" href="./css/clock.css" />
+</head>
+<body>
+<!-- Погода у Києві -->
+<div class="weather-wrapper">
+    <img src="" class="weather-icon" alt="Weather Icon" />
+    <p><strong>Місто</strong>
+        <br /><span class="weather-place"></span></p>
+    <p><strong>Температура</strong>
+        <br /><span class="weather-temperature"></span>
+        (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</p>
+    <p><strong>Опис</strong>
+        <br /><span class="weather-description capitalize"></span></p>
+    <p><strong>Вологість</strong>
+        <br /><span class="weather-humidity"></span></p>
+    <p><strong>Швидкість вітру</strong>
+        <br /><span class="weather-wind-speed"></span></p>
+    <p><strong>Світанок</strong>
+        <br /><span class="weather-sunrise"></span></p>
+    <p><strong>Захід</strong>
+        <br /><span class="weather-sunset"></span></p>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='src/js/lib/jquery.1.9.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+</script>
+<script src="./js/openweather.js"></script>
+<script>
+    $(function() {
+        $('.weather-temperature').openWeather({
+            key: 'c9d49310f8023ee2617a7634de23c2aa',
+            city: 'Kiev',
+            descriptionTarget: '.weather-description',
+            windSpeedTarget: '.weather-wind-speed',
+            minTemperatureTarget: '.weather-min-temperature',
+            maxTemperatureTarget: '.weather-max-temperature',
+            humidityTarget: '.weather-humidity',
+            sunriseTarget: '.weather-sunrise',
+            sunsetTarget: '.weather-sunset',
+            placeTarget: '.weather-place',
+            iconTarget: '.weather-icon',
+            customIcons: './img/icons/weather/',
+            success: function(data) {
+                $('.weather-wrapper').show();
+                console.log(data);
+            },
+            error: function(data) {
+                console.log(data.error);
+                $('.weather-wrapper').remove();
+            }
+        });
+    });
+</script>
+
+<!-- Курс валют -->
+<div id="IUAfinance29">
+    <div class="IUAfinance_block" id="IUAfinanceBlock">
+        <h1 class="IUAfinance_title" id="IUAfinanceTitle"></h1>
+        <a href="//finance.i.ua/informers/" target="_blank" class="IUAfinance_content" id="IUAfinanceContent"></a>
+        <a href="" id="IUAfinanceLink">Курсы доллара, евро и рубля по банкам</a>
+    </div>
+</div>
+<script type="text/javascript" src="./js/infoCurrency.js">
+</script>
+<br><br>
+
+<!-- Годинник -->
+<div class="digital-clock">00:00:00</div>
+<script src="js/clock.js"></script>
+
+</body>
+</html>
