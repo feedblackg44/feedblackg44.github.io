@@ -3,23 +3,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-</head>
-<body>
-<div id="share">
-	<div class="social" data-url="https://www.google.com/maps/@49.0413266,28.1117398,13.69z" data-title="Share buttons">
-		<a class="push facebook" data-id="fb"><i class="fa fa-facebook"></i> Facebook</a>
-		<a class="push twitter" data-id="tw"><i class="fa fa-twitter"></i> Twitter</a>
-		<a class="push pinetrest" data-id="pt"><i class="fa fa-pinetrest"></i> Pinetrest</a>
-        <a class="push instagram" data-id="ig"><i class="fa fa-instagram"></i> Instagram</a>
-	</div>
-</div>
 <style>
 	#share {
-	width: 650px;
-	border: 1px solid #eaeaea;
-	margin: 0 auto;
-	background: #fff;
-	text-align: center;
+		width: 650px;
+		border: 1px solid #eaeaea;
+		margin: 0 auto;
+		background: #fff;
+		text-align: center;
 	}
 
 	.like {
@@ -42,17 +32,29 @@
 
 	.facebook {background-color: #4267b2;}
 	.facebook:hover {background-color: #365899; color: #fff;}
-	
+
 	.twitter {background-color: #1da1f2;}
 	.twitter:hover {background-color: #1a91da; color: #fff;}
 
-	
+
 	.pinetrest {background-color: #e20505;}
 	.pinetrest:hover {background-color: #ee0808fd; color: #fff;}
 
-    .instagram {background-color: #ff9204;}
-    .instagram:hover {background-color: #df8004; color: #fff;}
+	.instagram {background-color: #ff9204;}
+	.instagram:hover {background-color: #df8004; color: #fff;}
 </style>
+</head>
+
+<body>
+<div id="share">
+	<div class="social" data-url="https://www.google.com/maps/@49.0413266,28.1117398,13.69z" data-title="Share buttons">
+		<a class="push facebook" data-id="fb"><i class="fa fa-facebook"></i> Facebook</a>
+		<a class="push twitter" data-id="tw"><i class="fa fa-twitter"></i> Twitter</a>
+		<a class="push pinetrest" data-id="pt"><i class="fa fa-pinetrest"></i> Pinetrest</a>
+        <a class="push instagram" data-id="ig"><i class="fa fa-instagram"></i> Instagram</a>
+	</div>
+</div>
+
 <script>
 	var Shares = {
 		width: 800,
