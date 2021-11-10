@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+    <style>
+
+        body {
+            background-color: rgb(229, 241, 229);
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .all {
+            width: 100%;
+            height: 100vh;
+            background-color:blueviolet;
+        }
+
+        .header {
+            width: 100%;
+            height: 20%;
+            background-color: cadetblue;
+            display: flex;
+        }
+
+        .header_first {
+            background-color: rgb(192, 157, 176);
+            text-align: center;
+            font-size: 100%;
+            width: 16%;
+            height: 100%;
+        }
+
+        .header_second {
+            background-color: rgb(155, 106, 132);
+            text-align: center;
+            font-size: 56px;
+            width: 28%;
+            height: 100%;
+        }
+
+        .header_third {
+            background-color: rgb(88, 51, 71);
+            text-align: center;
+            font-size: 56px;
+            width: 28%;
+            height: 100%;
+        }
+
+        .header_forth {
+            background-color: rgb(168, 138, 154);
+            text-align: center;
+            font-size: 56px;
+            width: 28%;
+            height: 100%;
+        }
+
+        .downbox {
+            display: flex;
+            width: 100%;
+            height: 80%;
+            background-color: cornflowerblue;
+        }
+
+        .left {
+            width: 16%;
+            height: 100%;
+            background-color: rgb(171, 157, 221);
+            padding: 15px;
+            font-size: 24px;
+            font-style: italic;
+        }
+
+        .right {
+            width: 84%;
+            height: 100%;
+            background-color:rgb(229, 241, 229);
+        }
+
+        #gallery {
+            padding: 20px;
+        }
+        .decor {
+            text-decoration:none;
+        }
+        *,
+        *:before,
+        *:after{
+            box-sizing: border-box;
+        }
+
+
+    </style>
+
+    <head>
+        <meta charset="utf-8">
+        <!-- JQUI + JQ -->
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+        <!-- UG -->
+        <script type='text/javascript' src='unitegallery-master/dist/js/unitegallery.min.js'></script> 
+        <link rel='stylesheet' href='unitegallery-master/dist/css/unite-gallery.css' type='text/css' /> 
+
+        <script type='text/javascript' src='unitegallery-master/dist/themes/default/ug-theme-default.js'></script> 
+        <link rel='stylesheet' href='unitegallery-master/dist/themes/default/ug-theme-default.css' type='text/css' />
+
+        <script src='unitegallery-master/dist/themes/tiles/ug-theme-tiles.js' type='text/javascript'></script>
+    </head>
+
+    <body>
+        <div class = "all">
+            <div class = "header">
+                <div class = "header_first">
+                </div>
+                <div class = "header_second" >
+                    <a class = "decor" href = header_second.html>Слайдер фото</a>
+                </div>
+                <div class = "header_third">
+                    <a class = "decor" href = header_third.html>Слайдер видео</a>
+                </div>
+                <div class = "header_forth">
+                    <a class = "decor" href = header_forth.html>Слайдер третий</a>
+                </div>
+            </div>
+            <div class = "downbox">
+                <div class = "left">
+                    <a>Film has a great color range to it which allows it to pull out the depth of each color captured and making the image feel very rich. This is one of the main reasons I love film…for that incredible color! Film also has a beautiful ability to pull out grain in all the right ways in an image.</a>
+                </div>
+                <div class = "right">
+                    <div id = "photos" style="display:none;">
+                        <img alt = "first picture" src = "Пленка 1-3/1.jpg"
+                        data-image="Пленка 1-3/1.jpg">
+                        
+                        <img alt = "second picture" src = "Пленка 1-3/2.jpg"
+                        data-image="Пленка 1-3/2.jpg">
+                    
+                        <img alt = "third picture" src = "Пленка 1-3/3.jpg"
+                        data-image="Пленка 1-3/3.jpg">
+                     
+                        <img alt = "fourth picture" src = "Пленка 1-3/4.jpg"
+                        data-image="Пленка 1-3/4.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/7.jpg"
+                        data-image="Пленка 1-3/7.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/8.jpg"
+                        data-image="Пленка 1-3/8.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/9.jpg"
+                        data-image="Пленка 1-3/9.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/10.jpg"
+                        data-image="Пленка 1-3/10.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/11.jpg"
+                        data-image="Пленка 1-3/11.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/12.jpg"
+                        data-image="Пленка 1-3/12.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/13.jpg"
+                        data-image="Пленка 1-3/13.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/14.jpg"
+                        data-image="Пленка 1-3/14.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/15.jpg"
+                        data-image="Пленка 1-3/15.jpg">
+
+                        <img alt = "fourth picture" src = "Пленка 1-3/16.jpg"
+                        data-image="Пленка 1-3/16.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <script type="text/javascript">
+
+            jQuery(document).ready(function(){
+    
+                $('#photos').unitegallery({
+                    gallery_theme: "tiles"
+                });
+    
+            });
+            
+        </script>
+    </body>
+
+    
+</html>
