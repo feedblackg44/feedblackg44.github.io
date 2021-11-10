@@ -82,8 +82,233 @@
 <div class="digital-clock">00:00:00</div>
 <script src="js/clock.js"></script>
 
-<footer>
-    <a href="https://github.com/feedblackg44/feedblackg44.github.io/blob/master/lab5/informers.html">Код сторінки.</a>
-</footer>
+<div>
+    <h3>HTML-код</h3>
+    <xmp>
+        <!DOCTYPE html>
+        <html lang="en-US">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="/js/openweather.js"></script>
+            <link rel="stylesheet" href="./css/weather.css" />
+
+            <link rel="stylesheet" href="./css/infoCurrency.css" />
+
+            <link rel="stylesheet" href="./css/clock.css" />
+        </head>
+        <body>
+        <!-- Погода у Києві -->
+        <div class="weather-wrapper">
+            <img src="" class="weather-icon" alt="Weather Icon" />
+            <p><strong>Місто</strong>
+                <br /><span class="weather-place"></span></p>
+            <p><strong>Температура</strong>
+                <br /><span class="weather-temperature"></span>
+                (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</p>
+            <p><strong>Опис</strong>
+                <br /><span class="weather-description capitalize"></span></p>
+            <p><strong>Вологість</strong>
+                <br /><span class="weather-humidity"></span></p>
+            <p><strong>Швидкість вітру</strong>
+                <br /><span class="weather-wind-speed"></span></p>
+            <p><strong>Світанок</strong>
+                <br /><span class="weather-sunrise"></span></p>
+            <p><strong>Захід</strong>
+                <br /><span class="weather-sunset"></span></p>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='src/js/lib/jquery.1.9.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+            }
+        </script>
+        <script src="./js/openweather.js"></script>
+        <script>
+            $(function() {
+                $('.weather-temperature').openWeather({
+                    key: 'c9d49310f8023ee2617a7634de23c2aa',
+                    city: 'Kiev',
+                    descriptionTarget: '.weather-description',
+                    windSpeedTarget: '.weather-wind-speed',
+                    minTemperatureTarget: '.weather-min-temperature',
+                    maxTemperatureTarget: '.weather-max-temperature',
+                    humidityTarget: '.weather-humidity',
+                    sunriseTarget: '.weather-sunrise',
+                    sunsetTarget: '.weather-sunset',
+                    placeTarget: '.weather-place',
+                    iconTarget: '.weather-icon',
+                    customIcons: './img/icons/weather/',
+                    success: function(data) {
+                        $('.weather-wrapper').show();
+                        console.log(data);
+                    },
+                    error: function(data) {
+                        console.log(data.error);
+                        $('.weather-wrapper').remove();
+                    }
+                });
+            });
+        </script>
+
+        <!-- Курс валют -->
+        <div id="IUAfinance29">
+            <div class="IUAfinance_block" id="IUAfinanceBlock">
+                <h1 class="IUAfinance_title" id="IUAfinanceTitle"></h1>
+                <a href="//finance.i.ua/informers/" target="_blank" class="IUAfinance_content" id="IUAfinanceContent"></a>
+                <a href="" id="IUAfinanceLink">Курсы доллара, евро и рубля по банкам</a>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/infoCurrency.js">
+        </script>
+        <br><br>
+
+        <!-- Годинник -->
+        <div class="digital-clock">00:00:00</div>
+        <script src="js/clock.js"></script>
+
+        </body>
+        </html>
+    </xmp>
+
+    <h3>CSS-код</h3>
+    <xmp>
+        .digital-clock {
+            margin: auto;
+            position: relative;
+            width: 200px;
+            height: 60px;
+            color: #ffffff;
+            border: 2px solid #999;
+            border-radius: 4px;
+            text-align: center;
+            font: 50px 'Times New Roman';
+            background: black;
+        }
+        #IUAfinance29 {
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 210px;
+            width: 210px;
+            position: relative;
+        }
+        #IUAfinance29 * {
+            margin: 0;
+            padding: 0;
+        }
+        #IUAfinance29 a, #IUAfinance29 a:hover {
+            border: none;
+            text-decoration: underline;
+            color: inherit;
+        }
+        #IUAfinance29 .IUAfinance_block {
+            overflow: hidden;
+            padding: 4px;
+            font-family: Arial;
+            font-size: 10px;
+            background: #F6F6F6;
+            border: 1px solid #00529c;
+            color: #000000;
+        }
+        #IUAfinance29 .IUAfinance_title {
+            overflow: hidden;
+            margin-top: -4px;
+            font-size: 12px;
+            font-weight: bold;
+            height: 20px;
+            line-height: 20px;
+            color: #00529C;
+        }
+        #IUAfinance29 .IUAfinance_title i {
+            position: absolute;
+            right: 4px;
+            top: 2px;
+            width: 36px;
+            height: 14px;
+            background: url(//i.i.ua/v2/logo/logo_small_14_black.png) no-repeat 0 0 transparent;
+            opacity: .3;
+        }
+        #IUAfinance29 .IUAfinance_content, #IUAfinance29 .IUAfinance_content:hover {
+            display: block;
+            background: #FFFFFF;
+            padding: 4px;
+            margin-bottom: 4px;
+            text-decoration: none;
+            color: inherit;
+        }
+        #IUAfinance29 .IUAfinance_head_title {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        #IUAfinance29 .IUAfinance_item, #IUAfinance29 .IUAfinance_head {
+            padding: 4px 0;
+        }
+        #IUAfinance29 .IUAfinance_item:last-child {
+            padding-bottom: 0;
+        }
+        #IUAfinance29 .IUAfinance_item {
+            border-top: 1px dotted #DDD;
+            font-size: 18px;
+            font-family: Trebuchet MS;
+        }
+        #IUAfinance29 .IUAfinance_item_title, #IUAfinance29 .IUAfinance_item_data {
+            display: inline-block;
+            vertical-align: top;
+            width: 42%;
+            text-align: right;
+        }
+        #IUAfinance29 .IUAfinance_item_title:first-child,
+        #IUAfinance29 .IUAfinance_item_data:first-child  {
+            width: 16%;
+            text-align: left;
+        }
+        #IUAfinance29 .IUAfinance-increase:before {
+            content: "\25B2";
+            color: #40983c;
+            font-size: 11px;
+        }
+        #IUAfinance29 .IUAfinance-decrease:before {
+            content: "\25BC";
+            color: #ed482e;
+            font-size: 11px;
+        }
+        .weather-wrapper {
+            background: skyblue;
+            padding: 40px 20px;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+            min-width: 210px;
+            width: 210px;
+            position: relative;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        strong {
+            color: steelblue;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+
+        .hide {
+            display: none;
+        }
+    </xmp>
+</div>
 </body>
 </html>
