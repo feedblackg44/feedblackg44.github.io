@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/covervid.css" />
+    <link rel="stylesheet" href="css/gifplayer.css" />
+    <link rel="stylesheet" href="css/focuspoint.css" />
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#resizable" ).resizable();
+        } );
+    </script>
+
+    <style>
+        #resizable { width: 200px; height: 150px; padding: 0.5em; }
+    </style>
+</head>
+
+<body>
+
+    <!-- CoverVid -->
+    <div class="covervid-wrapper">
+        <video class="covervid-video" autoplay loop muted poster="img/poster.jpg">
+            <source src="videos/dreamscapes.mp4" type="video/mp4">
+            <source src="videos/dreamscapes.webm" type="video/webm">
+        </video>
+        <div class="floated">
+            <h2>CoverVid.js on the background</h2>
+        </div>
+    </div>
+
+    <script src="js/covervid.js"></script>
+    <script src="js/scripts.js"></script>
+    <script type="text/javascript">
+        $('.covervid-video').coverVid(1920, 1080);
+    </script>
+
+    <div class="cont">
+        <!-- GifPlayer -->
+        <h2>GifPlayer.js:</h2>
+        <div>
+            <img class="gifplayer" src="img/cute-owl.png" data-gif="img/cute-owl.gif" />
+        </div>
+        <script src="js/jquery.gifplayer.js"></script>
+
+        <script>
+            $(document).ready( function(){
+                $('.gifplayer').gifplayer();
+            });
+        </script>
+
+        <br>
+
+        <!-- FocusPoint -->
+        <h2>FocusPoint.js:</h2>
+        <div id="resizable" class="ui-widget-content">
+            <div class="ui-widget-header">
+                <div id="Frame1" class="focuspoint"
+                data-focus-x="-0.33"
+                data-focus-y="0.4"
+                data-image-w="1000"
+                data-image-h="600">
+                <img src="img/owl11.jpg" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/jquery.focuspoint.js"></script>
+        <script type="text/javascript">
+            (function($) {
+                $(document).ready(function() {
+                    //Activate focus points
+                    $('.focuspoint').focusPoint();
+                });
+            }(jQuery));
+        </script>
+
+    </div>
+</body>
+</html>
