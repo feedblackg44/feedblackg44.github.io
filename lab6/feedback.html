@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        img {
+            max-width: 1000px;
+        }
+        li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h1>Форма зворотнього зв'язку. Лист насправді не відправляється, для того щоб не підіймати окремо mail-сервер</h1>
+<ul>
+    <li>Форма:<br>
+        <img src="imgweb/Screenshot_12.png" /></li>
+    <li>Результат форми:<br>
+        <img src="imgweb/Screenshot_13.png" /></li>
+</ul>
+<h3>HTML-код:</h3>
+<xmp>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Форма обратной связи на PHP с отправкой на почту</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+    <form action="mail.php" method="post" name="form">
+        <input name="name" type="text" placeholder="Ваше имя" />
+        <br>
+        <input name="email" type="text" placeholder="Ваша почта" />
+        <br>
+        <input size="30" name="header" type="text" placeholder="Тема" />
+        <br>
+        <textarea cols="32" name="message" rows="5"> Текст сообщения
+    </textarea>
+        <br>
+        <input type="submit" value="Отправить" />
+    </form>
+    </body>
+    </html>
+</xmp>
+<h3>CSS-код:</h3>
+<xmp>
+    body {
+        /*text-align: center;*/
+        margin: 10;
+        font-size: 16px;
+    }
+    input {
+        display: inline-block;
+        margin: 10px auto;
+        border: 2px solid #eee;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    textarea {
+        display: inline-block;
+        margin: 10px auto;
+        border: 2px solid #eee;
+        padding: 10px 20px;
+        font-size: 16px;
+    }</xmp>
+<h3>PHP-код:</h3>
+<xmp>
+    <?php
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $header = $_POST['header'];
+    $message = $_POST['message'];
+    $mes = "Имя: $name <br>E-mail: $email <br>Тема: $header <br>Текст: $message";
+    echo $mes;
+    echo "<br><br>";
+    echo "Сообщение отправлено";
+    ?>
+</xmp>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Bind Click Event to Dynamically added Elements</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/dynamic.css" />
+</head>
+<body>
+
+<!-- Перший динамічний елемент -->
+<h2>1</h2>
+<div class="elements">
+    <button id="listbutton">Додати новий елемент</button>
+    <p>Натисніть вище, щоб додати нові елементи списку. Ви можете видалити їх пізніше.</p>
+    <ol>
+        <li>Тестовий елемент списку</li>
+        <li>Тестовий елемент списку</li>
+        <li>Тестовий елемент списку</li>
+    </ol>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#listbutton").click(function(){
+            $("ol").append("<li>Тестовий елемент списку <a href='javascript:void(0);' " +
+                                                          "class='remove'>×</a></li>");
+        });
+        $(document).on("click", "a.remove" , function() {
+            $(this).parent().remove();
+        });
+    });
+</script>
+
+<!-- Другий та трейтій динамічні елементи -->
+<h2>2-3</h2>
+<div id="dialog" title="Завантаження файлів">
+    <div class="progress-label">Починаємо завантаження...</div>
+    <div id="progressbar"></div>
+</div>
+<button id="downloadButton">Почати завантаження</button>
+<script>
+    $( function() {
+        var progressTimer,
+            progressbar = $( "#progressbar" ),
+            progressLabel = $( ".progress-label" ),
+            dialogButtons = [{
+                text: "Припинити",
+                click: closeDownload
+            }],
+            dialog = $( "#dialog" ).dialog({
+                autoOpen: false,
+                closeOnEscape: false,
+                resizable: false,
+                buttons: dialogButtons,
+                open: function() {
+                    progressTimer = setTimeout( progress, 2000 );
+                },
+                beforeClose: function() {
+                    downloadButton.button( "option", {
+                        disabled: false,
+                        label: "Почати завантаження"
+                    });
+                }
+            }),
+            downloadButton = $( "#downloadButton" )
+                .button()
+                .on( "click", function() {
+                    $( this ).button( "option", {
+                        disabled: true,
+                        label: "Завантажується..."
+                    });
+                    dialog.dialog( "open" );
+                });
+
+        progressbar.progressbar({
+            value: false,
+            change: function() {
+                progressLabel.text( "Прогрес: " + progressbar.progressbar( "value" ) + "%" );
+            },
+            complete: function() {
+                progressLabel.text( "Готово!" );
+                dialog.dialog( "option", "buttons", [{
+                    text: "Закрити",
+                    click: closeDownload
+                }]);
+                $(".ui-dialog button").last().trigger( "focus" );
+            }
+        });
+
+        function progress() {
+            var val = progressbar.progressbar( "value" ) || 0;
+
+            progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+            if ( val <= 99 ) {
+                progressTimer = setTimeout( progress, 50 );
+            }
+        }
+
+        function closeDownload() {
+            clearTimeout( progressTimer );
+            dialog
+                .dialog( "option", "buttons", dialogButtons )
+                .dialog( "close" );
+            progressbar.progressbar( "value", false );
+            progressLabel
+                .text( "Почати завантаження..." );
+            downloadButton.trigger( "focus" );
+        }
+    } );
+</script>
+<br><br><br>
+<div class="code">
+    <h4>HTML + JS:</h4>
+    <xmp>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <title>jQuery Bind Click Event to Dynamically added Elements</title>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+            <link rel="stylesheet" href="css/dynamic.css" />
+        </head>
+        <body>
+
+        <!-- Перший динамічний елемент -->
+        <h2>1</h2>
+        <div class="elements">
+            <button id="listbutton">Додати новий елемент</button>
+            <p>Натисніть вище, щоб додати нові елементи списку. Ви можете видалити їх пізніше.</p>
+            <ol>
+                <li>Тестовий елемент списку</li>
+                <li>Тестовий елемент списку</li>
+                <li>Тестовий елемент списку</li>
+            </ol>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#listbutton").click(function(){
+                    $("ol").append("<li>Тестовий елемент списку <a href='javascript:void(0);' " +
+                                                                  "class='remove'>×</a></li>");
+                });
+                $(document).on("click", "a.remove" , function() {
+                    $(this).parent().remove();
+                });
+            });
+        </script>
+
+        <!-- Другий та трейтій динамічні елементи -->
+        <h2>2-3</h2>
+        <div id="dialog" title="Завантаження файлів">
+            <div class="progress-label">Починаємо завантаження...</div>
+            <div id="progressbar"></div>
+        </div>
+        <button id="downloadButton">Почати завантаження</button>
+        <script>
+            $( function() {
+                var progressTimer,
+                    progressbar = $( "#progressbar" ),
+                    progressLabel = $( ".progress-label" ),
+                    dialogButtons = [{
+                        text: "Припинити",
+                        click: closeDownload
+                    }],
+                    dialog = $( "#dialog" ).dialog({
+                        autoOpen: false,
+                        closeOnEscape: false,
+                        resizable: false,
+                        buttons: dialogButtons,
+                        open: function() {
+                            progressTimer = setTimeout( progress, 2000 );
+                        },
+                        beforeClose: function() {
+                            downloadButton.button( "option", {
+                                disabled: false,
+                                label: "Почати завантаження"
+                            });
+                        }
+                    }),
+                    downloadButton = $( "#downloadButton" )
+                        .button()
+                        .on( "click", function() {
+                            $( this ).button( "option", {
+                                disabled: true,
+                                label: "Завантажується..."
+                            });
+                            dialog.dialog( "open" );
+                        });
+
+                progressbar.progressbar({
+                    value: false,
+                    change: function() {
+                        progressLabel.text( "Прогрес: " + progressbar.progressbar( "value" ) + "%" );
+                    },
+                    complete: function() {
+                        progressLabel.text( "Готово!" );
+                        dialog.dialog( "option", "buttons", [{
+                            text: "Закрити",
+                            click: closeDownload
+                        }]);
+                        $(".ui-dialog button").last().trigger( "focus" );
+                    }
+                });
+
+                function progress() {
+                    var val = progressbar.progressbar( "value" ) || 0;
+
+                    progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+                    if ( val <= 99 ) {
+                        progressTimer = setTimeout( progress, 50 );
+                    }
+                }
+
+                function closeDownload() {
+                    clearTimeout( progressTimer );
+                    dialog
+                        .dialog( "option", "buttons", dialogButtons )
+                        .dialog( "close" );
+                    progressbar.progressbar( "value", false );
+                    progressLabel
+                        .text( "Почати завантаження..." );
+                    downloadButton.trigger( "focus" );
+                }
+            } );
+        </script>
+        </body>
+        </html>
+    </xmp>
+    <h4>CSS:</h4>
+    <xmp>
+        .elements {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        #progressbar {
+            margin-top: 20px;
+        }
+
+        .progress-label {
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        .ui-dialog-titlebar-close {
+            display: none;
+        }
+    </xmp>
+</div>
+</body>
+</html>

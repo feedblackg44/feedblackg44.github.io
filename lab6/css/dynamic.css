@@ -1,0 +1,23 @@
+.elements {
+    border: 1px solid black;
+    padding: 10px;
+}
+#progressbar {
+    margin-top: 20px;
+}
+
+.progress-label {
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.ui-dialog-titlebar-close {
+    display: none;
+}
+.code {
+    padding: 0px 0px 0px 25px;
+    margin: 10px;
+    background: #dddddd;
+    border: 1px solid black;
+    border-radius: 10px;
+}
