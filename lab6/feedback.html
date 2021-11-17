@@ -68,6 +68,7 @@
 <h3>PHP-код:</h3>
 <xmp>
     <?php
+    date_default_timezone_set('Europe/Kiev');
     $name = $_POST['name'];
     $email = $_POST['email'];
     $header = $_POST['header'];
@@ -76,6 +77,8 @@
     echo $mes;
     echo "<br><br>";
     echo "Сообщение отправлено";
+    echo "<br><br>";
+    echo date('l jS \of F Y h:i:s A');
     ?>
 </xmp>
 </body>
