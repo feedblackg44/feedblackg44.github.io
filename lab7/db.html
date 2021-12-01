@@ -15,15 +15,258 @@
 <body>
     <h1>Введення, виведення та пошук:</h1>
     <img src="imgweb/Screenshot_4.png" />
+    <h2>Код головної сторінки:</h2>
+    <xmp>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Робота з БД</title>
+            <!--link rel="stylesheet" href="css/style.css" /-->
+
+            <style>
+                body {
+                    margin: 10;
+                    font-size: 16px;
+                }
+                .input, .label {
+                    display: inline-block;
+                    margin: 10px auto;
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    min-width: 240px;
+                    background: white;
+                }
+                textarea {
+                    display: inline-block;
+                    margin: 10px auto;
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                }
+                .n1 {
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    background: #8bc9e3;
+                }
+                .n2 {
+                    border: 2px solid #ddd;
+                    padding: 10px 20px;
+                    background: silver;
+                }
+                .n3 {
+                    border: 2px solid #dededed;
+                    padding: 10px 20px;
+                    background: lightpink;
+                }
+            </style>
+
+        </head>
+        <body>
+        <div class="n1">
+            <h2>Форма для внесення даних:</h2>
+            <?php
+                $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                mysqli_select_db($connection, "filmlibrary");
+
+                $resultGenre = mysqli_query($connection, "SELECT * FROM genre");
+                $arrayGenre = mysqli_fetch_all($resultGenre);
+                $lengthGenre = mysqli_num_rows($resultGenre);
+
+                $resultStudio = mysqli_query($connection, "SELECT * FROM studio");
+                $arrayStudio = mysqli_fetch_all($resultStudio);
+                $lengthStudio = mysqli_num_rows($resultStudio);
+
+                $resultDirector = mysqli_query($connection, "SELECT * FROM director");
+                $arrayDirector = mysqli_fetch_all($resultDirector);
+                $lengthDirector = mysqli_num_rows($resultDirector);
+
+
+                echo   "<form action='input.php' method='post' name='form'>
+                <input class='input' name='title' type='text' placeholder='Назва фільму' />
+                <input class='input' name='duration' type='text' placeholder='Тривалість (у хвилинах)' />
+                <input class='input' name='dateofrelease' type='text' placeholder='Дата виходу (РРРР-ММ-ДД)' />
+                <br>
+                <div class='label'>
+                    <label for='directorid'>Виберіть режисера:</label>
+                    <select name='directorid'/>";
+                    for ($i = 0; $i < $lengthDirector; $i++)
+                    {
+                    echo "<option value='" . $arrayDirector[$i][0] . "'>" . $arrayDirector[$i][1] . ' ' . $arrayDirector[$i][2]
+                    . "</option>";
+                    }
+                    echo   "</select>
+                </div>
+                <div class='label'>
+                    <label for='studioid'>Виберіть студію:</label>
+                    <select name='studioid'/>";
+                    for ($i = 0; $i < $lengthStudio; $i++)
+                    {
+                    echo "<option value='" . $arrayStudio[$i][0] . "'>" . $arrayStudio[$i][1]
+                    . "</option>";
+                    }
+                    echo   "</select>
+                </div>
+                <br>
+                <div class='label'>
+                    Виберіть жанри: <br><br>";
+                    for ($i = 0; $i < $lengthGenre; $i++)
+                    {
+                    echo "<input type='checkbox' name='genres[]' value='" . $arrayGenre[$i][0] . "' /> "
+                    . $arrayGenre[$i][1] . "<br>";
+                    }
+                    echo   "</div>
+                <br>
+                <textarea cols='32' name='annotation' rows='5'>Анотація</textarea>
+                <br>
+                <input type='submit' value='Додати' />
+                </form>";
+            ?>
+        </div>
+        <div class="n2">
+            <h2>Виведення даних:</h2>
+            <form action='show.php' method='post' name='form'>
+                <input type='submit' value='Показати усі фільми' />
+            </form>
+        </div>
+        <div class="n3">
+            <h2>Пошук за жанром:</h2>
+            <form action='search.php' method='post' name='form'>
+                <div class='label'>
+                    <label for='onegenre'>Виберіть жанр:</label>
+                    <select name='onegenre'/>";
+                    <?php
+            for ($i = 0; $i < $lengthGenre; $i++)
+            {
+                echo "<option value='" . $arrayGenre[$i][0] . "'>" . $arrayGenre[$i][1]
+                    . "</option>";
+                    }
+                    ?>
+                    </select>
+                </div>
+                <br>
+                <input type='submit' value='Показати усі фільми за цим жанром' />
+            </form>
+        </div>
+        </body>
+        </html>
+    </xmp>
     <ol>
         <li>Результат внесення даних:<br>
             <img src="imgweb/Screenshot_5.png" />
+            <xmp>
+                <a href="index.php">Back to the form</a>
+                <br>
+                <br>
+                <?php
+                    $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                    mysqli_select_db($connection, "filmlibrary");
+
+                    $title = mysqli_real_escape_string($connection, $_POST["title"]);
+                    $duration = intval(mysqli_real_escape_string($connection, $_POST["duration"]));
+                    $dateofrelease = mysqli_real_escape_string($connection, $_POST["dateofrelease"]);
+                    $directorid = $_POST["directorid"];
+                    $studioid = $_POST["studioid"];
+                    $annotation = mysqli_real_escape_string($connection, $_POST["annotation"]);
+                    $genre = $_POST["genres"];
+
+                    if ($title == null)
+                        die("Title is incorrect!");
+
+                    if ($duration <= 0)
+                        die("Film duration is incorrect!");
+
+                    if ($dateofrelease == null)
+                        $dateofrelease == '1970-01-01';
+
+                    $query_insert =
+                        "INSERT INTO film (duration, title, annotation, dateofrelease, fkdirectorid, fkstudioid)
+                         VALUES ('" . $duration . "', '" . $title . "', '" . $annotation . "', '" . $dateofrelease
+                                    . "', " . $directorid . ", " . $studioid . ")";
+                    $result = mysqli_query($connection, $query_insert);
+
+                    if ($result)
+                    {
+                        $curID = mysqli_insert_id($connection);
+                        $query_insert2 = "INSERT INTO films_genres (fkfilmid, fkgenreid) VALUES ";
+                        for ($i = 0; $i < count($genre); $i++)
+                            $query_insert2 .= "(" . $curID . ", " . $genre[$i] . "),";
+                        $query_insert2 = substr($query_insert2, 0, -1) . ';';
+
+                        mysqli_query($connection, $query_insert2);
+                    }
+                    else
+                    {
+                        die("Something went wrong!");
+                    }
+                    ?>
+                <h4>Succsesfull!</h4>
+            </xmp>
         </li>
         <li>Результат виведення даних:<br>
             <img src="imgweb/Screenshot_6.png" />
+            <xmp>
+                <a href="index.php">Back to the form</a>
+                <br>
+                <br>
+                <?php
+                    $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                    mysqli_select_db($connection, "filmlibrary");
+
+                    $query = "SELECT * FROM film";
+
+                    $result = mysqli_query($connection, $query);
+                    $array = mysqli_fetch_all($result);
+                    $height = mysqli_num_rows($result);
+                    $length = mysqli_num_fields($result);
+
+                    echo "<h3>Таблиця створених фільмів</h3><br>";
+                    for ($i = 0; $i < $height; $i++)
+                    {
+                        echo "Фільм номер " . strval($i + 1) . ": ";
+                    for ($j = 0; $j < $length; $j++)
+                    {
+                        echo $array[$i][$j] . " | ";
+                    }
+                        echo "<br>";
+                    }
+                ?>
+            </xmp>
         </li>
         <li>Результат пошук даних:<br>
             <img src="imgweb/Screenshot_7.png" />
+            <xmp>
+                <a href="index.php">Back to the form</a>
+                <br>
+                <br>
+                <?php
+                    $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                    mysqli_select_db($connection, "filmlibrary");
+
+                    $genre = $_POST["onegenre"];
+
+                    $query = "SELECT title FROM film WHERE EXISTS
+                              (SELECT * FROM films_genres WHERE films_genres.fkfilmid = idfilm
+                                                           AND films_genres.fkgenreid = " . $genre . ");";
+
+                    $result = mysqli_query($connection, $query);
+                    $array = mysqli_fetch_all($result);
+                    $height = mysqli_num_rows($result);
+                    $length = mysqli_num_fields($result);
+
+                    echo "<h3>Таблиця фільмів за жанром:</h3><br>";
+                    for ($i = 0; $i < $height; $i++)
+                    {
+                        echo "Фільм номер " . strval($i + 1) . ": ";
+                    for ($j = 0; $j < $length; $j++)
+                    {
+                        echo $array[$i][$j] . " | ";
+                    }
+                        echo "<br>";
+                    }
+                ?>
+            </xmp>
         </li>
     </ol>
 </body>
