@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        img {
+            max-width: 650px;
+            border: 2px solid black;
+        }
+        li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Введення, виведення та пошук:</h1>
+    <img src="imgweb/Screenshot_6.png" />
+    <h2>Код адмін сторінки:</h2>
+    <xmp>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>ADMIN PANEL</title>
+
+            <style>
+                body {
+                    margin: 10;
+                    font-size: 16px;
+                }
+                .input, .label {
+                    display: inline-block;
+                    margin: 10px auto;
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    min-width: 240px;
+                    background: white;
+                }
+                textarea {
+                    display: inline-block;
+                    margin: 10px auto;
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                }
+                .n1 {
+                    border: 2px solid #eee;
+                    padding: 10px 20px;
+                    background: #8bc9e3;
+                }
+                .n2 {
+                    border: 2px solid #ddd;
+                    padding: 10px 20px;
+                    background: silver;
+                }
+                .n3 {
+                    border: 2px solid #dededed;
+                    padding: 10px 20px;
+                    background: lightpink;
+                }
+            </style>
+        </head>
+
+        <body>
+        <div class="n1">
+            <h2>Форма для внесення даних:</h2>
+            <?php
+            $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+            mysqli_select_db($connection, "ecampus");
+
+            $resultFaculty = mysqli_query($connection, "SELECT * FROM faculty");
+            $arrayFaculty = mysqli_fetch_all($resultFaculty);
+            $lengthFaculty = mysqli_num_rows($resultFaculty);
+
+            $resultSpeciality = mysqli_query($connection, "SELECT speciality.idSpeciality, faculty.nameFaculty, speciality.SpecialityName
+                                                                 FROM speciality INNER JOIN faculty ON faculty.idFaculty=speciality.fkFacultyId;");
+            $arraySpeciality = mysqli_fetch_all($resultSpeciality);
+            $lengthSpeciality = mysqli_num_rows($resultSpeciality);
+
+            $resultGroup = mysqli_query($connection, "SELECT groups.idGroup, speciality.SpecialityName, speciality.codeSpeciality, groups.codeGroup
+                                                            FROM (speciality INNER JOIN faculty ON faculty.idFaculty=speciality.fkFacultyId)
+                                                                  INNER JOIN groups ON groups.fkSpecialityId = speciality.idSpeciality;");
+            $arrayGroup = mysqli_fetch_all($resultGroup);
+            $lengthGroup = mysqli_num_rows($resultGroup);
+
+            echo   "    <form action='input.php' method='post' name='form'>
+            <input class='input' name='fullName' type='text' placeholder='Имя студента' />
+            <br>
+            <input class='input' name='course' type='text' placeholder='Введите курс' />
+            <br>
+            <div class='label'>
+                <label for='fkFacultyId'>Выберите факультет:</label>
+                <select name='fkFacultyId'/>";
+                for ($i = 0; $i < $lengthFaculty; $i++)
+                {
+                echo "          <option value='" . $arrayFaculty[$i][0] . "'>" . $arrayFaculty[$i][1] . "</option>";
+                }
+                echo   "    </select>
+            </div>
+            <div class='label'>
+                <label for='fkSpecialityId'>Выберите специальность:</label>
+                <select name='fkSpecialityId'/>";
+                for ($i = 0; $i < $lengthSpeciality; $i++)
+                {
+                echo "          <option value='" . $arraySpeciality[$i][0] . "'>" . $arraySpeciality[$i][1] . " - " .
+                $arraySpeciality[$i][2] . "</option>";
+                }
+                echo   "    </select>
+            </div>
+            <div class='label'>
+                <label for='fkGroupId'>Выберите группу:</label>
+                <select name='fkGroupId'/>";
+                for ($i = 0; $i < $lengthGroup; $i++)
+                {
+                echo "          <option value='" . $arrayGroup[$i][0] . "'>" . $arrayGroup[$i][1] . " - " .
+                $arrayGroup[$i][2] . "-0" . $arrayGroup[$i][3] . "</option>";
+                }
+                echo   "</select>
+            </div>
+            <br>
+            <input class='input' name='login' type='text' placeholder='Придумайте логин' />
+            <br>
+            <input class='input' name='password' type='text' placeholder='Придумайте пароль' />
+            <br>
+            <input type='submit' value='Додати' />
+            </form>";
+            ?>
+        </div>
+        </body>
+        </html>
+    </xmp>
+    <ol>
+        <li>Результат внесення даних:<br>
+            <img src="imgweb/Screenshot_1.png" />
+            <xmp>
+                <a href="index.php">Back to the form</a>
+                <br>
+                <br>
+                <?php
+                $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                mysqli_select_db($connection, "ecampus");
+
+                $fullName = mysqli_real_escape_string($connection, $_POST["fullName"]);
+                $course = mysqli_real_escape_string($connection, $_POST["course"]);
+
+                $fkFacultyId = $_POST["fkFacultyId"];
+                $fkSpecialityId = $_POST["fkSpecialityId"];
+                $fkGroupId = $_POST["fkGroupId"];
+
+                $login = mysqli_real_escape_string($connection, $_POST["login"]);
+                $password = mysqli_real_escape_string($connection, $_POST["password"]);
+                $query_insert =
+                    "INSERT INTO students (fullName, course, fkFacultyId, fkSpecialityId, fkGroupID, login, password)
+                     VALUES ('" . $fullName . "', '" . $course . "', '" . $fkFacultyId . "', '" . $fkSpecialityId . "', '" .
+                     $fkGroupId . "', '" . $login . "', '" . $password . "')";
+                $result = mysqli_query($connection, $query_insert);
+                ?>
+                <h4>Succsesfull!</h4>
+            </xmp>
+        </li>
+        <li>Результат виведення даних:<br>
+            <img src="imgweb/Screenshot_5.png" />
+        </li>
+        <li>Результат пошук даних:<br>
+            <img src="imgweb/Screenshot_7.png" />
+        </li>
+    </ol>
+</body>
+</html>

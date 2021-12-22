@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        img {
+            max-width: 650px;
+        }
+        li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h1>Запит з виведенням у файл:</h1>
+<img src="imgweb/Screenshot_7.png" />
+<br>
+<img src="imgweb/Screenshot_8.png" />
+<xmp>
+    <?php
+    $query1 = "SELECT `idStudent`, `fullName`, `course`, `nameFaculty`, `SpecialityName`, `codeSpeciality`, `codeGroup`
+               FROM `faculty` RIGHT JOIN
+                   (`speciality` RIGHT JOIN
+                       (`groups` RIGHT JOIN `students` ON `groups`.`idGroup` = `students`.`fkGroupId`)
+                       ON `speciality`.`idSpeciality` = `students`.`fkSpecialityId`)
+                   ON `faculty`.`idFaculty` = `students`.`fkFacultyId`
+               WHERE `login` = '" . strval($login) . "' AND `password` = '" . strval($password) . "';";
+
+    $result1 = mysqli_query($connection, $query1);
+    $array = mysqli_fetch_all($result1);
+    $length = mysqli_num_fields($result1);
+
+    $file = fopen("log.txt", "w");
+    $temp = "";
+    for ($i = 0; $i < count($array[0]); $i++) {
+        $temp .= $array[0][$i] . "\n";
+    }
+    fwrite($file, $temp);
+    fclose($file);
+    ?>
+</xmp>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        img {
+            max-width: 650px;
+        }
+    </style>
+</head>
+<body>
+<h1>Авторизація. Сесія:</h1>
+<ol>
+    <li>Форма логіну:<br>
+        <img src="imgweb/Screenshot_9.png" />
+        <xmp>
+            <!DOCTYPE html>
+            <html lang="en-US">
+
+            <head>
+                <meta charset="UTF-8"/>
+                <title>Login</title>
+                <link rel="stylesheet" href="login.css#3">
+            </head>
+
+            <body>
+            <form action="cabinet.php" method="post">
+                <div class="container">
+                    <label for="uname"><b>Login</b></label>
+                    <input type="login" placeholder="Enter Login" name="login" required
+                    <?php
+                if(array_key_exists("lclogin", $_COOKIE)) {
+                    echo "value='" . $_COOKIE["lclogin"] . "' style='background-color: #f5fa8e'";
+                }
+            ?>
+                    />
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required
+                    <?php
+            if(array_key_exists("lcpass", $_COOKIE)) {
+                echo "value='" . $_COOKIE["lcpass"] . "' style='background-color: #f5fa8e'";
+            }
+            ?>
+                    />
+
+                    <?php
+        if (array_key_exists("incorrect", $_GET)) {
+            if ($_GET["incorrect"] == 1) {
+                echo "<p style='color: #ff1111;'>Incorrect login or password</p>";
+                    }
+                    }
+                    ?>
+
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" name="remember" checked> Remember me
+                    </label>
+                </div>
+            </form>
+            </body>
+            </html>
+        </xmp>
+    </li>
+    <li>Результат:<br>
+        <img src="imgweb/Screenshot_7.png" />
+        <xmp>
+            <?php
+session_start();
+$language = "eng";
+if(array_key_exists("lclang", $_COOKIE)) {
+    $language = $_COOKIE["lclang"];
+}
+if(array_key_exists("lang", $_GET)) {
+    $language = $_GET["lang"];
+    setcookie('lclang', $language, strtotime("+0.5 year"));
+}
+
+$transl = array (
+        "ukr" => array(
+            0 => "Інформація про студента: ",
+            1 => "ПІБ: ",
+            2 => "Курс: ",
+            3 => "Факультет: ",
+            4 => "Спеціальність: ",
+            5 => "Група: ",
+            6 => "Навчальні предмети: ",
+            7 => "Назва: ",
+            8 => "Викладач: ",
+            9 => "Вийти",
+            10 => "Обрати мову: "
+            ),
+            "ru" => array(
+            0 => "Информация о студенте: ",
+            1 => "ФИО: ",
+            2 => "Курс: ",
+            3 => "Факультет: ",
+            4 => "Специальность: ",
+            5 => "Группа: ",
+            6 => "Учебные предметы: ",
+            7 => "Название: ",
+            8 => "Преподаватель: ",
+            9 => "Выйти",
+            10 => "Выбрать язык: "
+            ),
+            "eng" => array(
+            0 => "Student information: ",
+            1 => "Full name: ",
+            2 => "Cource: ",
+            3 => "Faculty: ",
+            4 => "Specialty: ",
+            5 => "Group: ",
+            6 => "Subjects: ",
+            7 => "Title: ",
+            8 => "Teacher: ",
+            9 => "Logout",
+            10 => "Choose language: "
+            )
+            )
+            ?>
+
+            <!DOCTYPE html>
+            <html lang="en-US">
+
+            <head>
+                <meta charset="UTF-8"/>
+                <title>Сabinet</title>
+                <link rel="stylesheet" href="cabinet.css#8">
+            </head>
+
+            <body>
+            <div class="info">
+                <?php
+$connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+mysqli_select_db($connection, "ecampus");
+
+$login = null;
+if(array_key_exists("login", $_POST)) {
+    $login = mysqli_real_escape_string($connection, $_POST["login"]);
+} else if(array_key_exists("login", $_SESSION))
+    $login = mysqli_real_escape_string($connection, $_SESSION["login"]);
+
+$password = null;
+if(array_key_exists("psw", $_POST)) {
+    $password = mysqli_real_escape_string($connection, $_POST["psw"]);
+} else if(array_key_exists("psw", $_SESSION))
+    $password = mysqli_real_escape_string($connection, $_SESSION["psw"]);
+
+
+$query1 = "SELECT `idStudent`, `fullName`, `course`, `nameFaculty`, `SpecialityName`, `codeSpeciality`, `codeGroup`
+           FROM `faculty` RIGHT JOIN
+           	    (`speciality` RIGHT JOIN
+                	(`groups` RIGHT JOIN `students` ON `groups`.`idGroup` = `students`.`fkGroupId`)
+                ON `speciality`.`idSpeciality` = `students`.`fkSpecialityId`)
+           ON `faculty`.`idFaculty` = `students`.`fkFacultyId`
+           WHERE `login` = '" . strval($login) . "' AND `password` = '" . strval($password) . "';";
+
+$result1 = mysqli_query($connection, $query1);
+$array = mysqli_fetch_all($result1);
+$length = mysqli_num_fields($result1);
+
+$file = fopen("log.txt", "w");
+$temp = "";
+for ($i = 0; $i < count($array[0]); $i++) {
+    $temp .= $array[0][$i] . "\n";
+}
+fwrite($file, $temp);
+fclose($file);
+
+if(!count($array)) {
+    header('Location: index.php?incorrect=1');
+} else {
+    setcookie('lclogin', $login, strtotime("+0.5 year"));
+    $_SESSION['login'] = $login;
+    setcookie('lcpass', $password, strtotime("+0.5 year"));
+    $_SESSION['psw'] = $password;
+}
+
+$_SESSION['lcid'] = $array[0][0];
+$_SESSION['lcName'] = $array[0][1];
+$_SESSION['lcCource'] = $array[0][2];
+$_SESSION['lcFaculty'] = $array[0][3];
+$_SESSION['lcSpeciality'] = $array[0][4];
+$tempZero = "";
+if ($array[0][6] < 10) {
+    $tempZero .= "0";
+}
+$_SESSION['lcGroup'] = $array[0][5] . "-" . $tempZero . $array[0][6];
+
+echo "
+<div class='per-data'>
+                <h3>" . $transl[$language][0] . "</h3>
+                <ul>
+                    <li>" . $transl[$language][1] . $_SESSION['lcName'] . "</li>
+                    <li>" . $transl[$language][2] . $_SESSION['lcCource'] . "</li>
+                    <li>" . $transl[$language][3] . $_SESSION['lcFaculty'] . "</li>
+                    <li>" . $transl[$language][4] . $_SESSION['lcSpeciality'] . "</li>
+                    <li>" . $transl[$language][5] . $_SESSION['lcGroup'] . "</li>
+                </ul>
+            </div>";
+
+            echo "<br>";
+
+            $query2 =  "SELECT `subjectName`, `teacherName`
+            FROM `subjects` INNER JOIN `teachers` ON `subjects`.`teacherId`=`teachers`.`idteachers`;";
+
+            $result2 = mysqli_query($connection, $query2);
+            $arrayLessons = mysqli_fetch_all($result2);
+
+            echo "
+            <div class='subj'>
+                <h3>" . $transl[$language][6] .  "</h3>
+                <ul>";
+                    for ($i = 0; $i < count($arrayLessons); $i++) {
+                    $tempStr = "    <li> " . $transl[$language][7] . $arrayLessons[$i][0] . ".<br>" . $transl[$language][8] .
+                        $arrayLessons[$i][1] . ".</li>";
+                    echo $tempStr;
+                    }
+                    echo "
+                </ul>
+            </div>
+            <button onclick=" . "location.href='index.php'>" . $transl[$language][9] . "
+            </button>
+            <br>
+            <p style='text-align: right'>" . $transl[$language][10] . "
+                <a href='cabinet.php?lang=ukr'><img src='img/ukr.png' height='10px'></a>
+                <a href='cabinet.php?lang=ru' ><img src='img/ru.png' height='10px'></a>
+                <a href='cabinet.php?lang=eng'><img src='img/eng.png' height='10px'></a>
+            </p>"
+            ?>
+            </div>
+            </body>
+            </html>
+        </xmp>
+    </li>
+</ol>
+</body>
+</html>
