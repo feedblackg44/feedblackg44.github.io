@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img {
+            max-width: 650px;
+            border: 1px solid black;
+        }
+        li {
+            font-size: 18px;
+        }
+        xmp {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<h1>Повний функціонал сайту:</h1>
+<h3>Адмін панель</h3>
+<ol>
+    <li>Залежно від того, який факультет та яку спеціальність виберемо - змніняться випадаючі списки:<br>
+        <img src="img/Screenshot_9.png" />
+        <br>
+        <img src="img/Screenshot_10.png" />
+        <br>
+        <img src="img/Screenshot_11.png" />
+        <br>
+        <img src="img/Screenshot_12.png" />
+    </li>
+    <li>Створимо тестового студента
+        <img src="img/Screenshot_24.png" />
+    </li>
+    <li>Результат внесення даних:<br>
+        <img src="img/Screenshot_22.png" />
+    </li>
+    <li>Код адмін сторінки:
+        <xmp>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>ADMIN PANEL</title>
+
+                <style>
+                    body {
+                        margin: 10;
+                        font-size: 16px;
+                    }
+                    .input, .label {
+                        display: inline-block;
+                        margin: 10px auto;
+                        border: 2px solid #eee;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        min-width: 240px;
+                        background: white;
+                    }
+                    textarea {
+                        display: inline-block;
+                        margin: 10px auto;
+                        border: 2px solid #eee;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                    }
+                    .n1 {
+                        border: 2px solid #eee;
+                        padding: 10px 20px;
+                        background: #8bc9e3;
+                    }
+                    .n2 {
+                        border: 2px solid #ddd;
+                        padding: 10px 20px;
+                        background: silver;
+                    }
+                    .n3 {
+                        border: 2px solid #dededed;
+                        padding: 10px 20px;
+                        background: lightpink;
+                    }
+                </style>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            </head>
+
+            <body>
+            <div class="n1">
+                <h2>Форма для внесення даних:</h2>
+                <?php
+                $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                mysqli_select_db($connection, "ecampus");
+                ?>
+                <form action='input.php' method='post' name='form'>
+                    <input class='input' name='fullName' type='text' placeholder='Имя студента' required/>
+                    <br>
+                    <input class='input' name='course' type='text' placeholder='Введите курс' required/>
+                    <br>
+                    <div class='label'>
+                        <label for='fkFacultyId'>Выберите факультет:</label>
+                        <select id="faclist" name='fkFacultyId'>
+                            <option value="0" selected hidden>Виберіть</option>
+                            <?php
+                            $resultFaculty = mysqli_query($connection, "SELECT * FROM faculty");
+                            $arrayFaculty = mysqli_fetch_all($resultFaculty);
+                            $lengthFaculty = mysqli_num_rows($resultFaculty);
+
+                            for ($i = 0; $i < $lengthFaculty; $i++) {
+                                echo "<option value='" . $arrayFaculty[$i][0] . "'>" . $arrayFaculty[$i][1] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class='label'>
+                        <label for='fkSpecialityId'>Выберите специальность:</label>
+                        <select id="speclist" name='fkSpecialityId'>
+                        </select>
+                    </div>
+                    <div class='label'>
+                        <label for='fkGroupId'>Выберите группу:</label>
+                        <select id="grplist" name='fkGroupId' required>
+                        </select>
+                    </div>
+                    <script>
+                        function changeGroups () {
+                            $.ajax ({
+                                url: 'showgroup.php',
+                                method: 'post',
+                                dataType: 'json',
+                                data: {
+                                    facid: $('#faclist').val(),
+                                    specid: $('#speclist').val()
+                                },
+                                success: function (data) {
+                                    $('#grplist').empty();
+                                    for (var i = 0; i < Object.keys(data).length; i++) {
+                                        $('#grplist').append( $('<option>', {
+                                            value: data[i][0],
+                                            text: data[i][1] + "-0" + data[i][2]
+                                        }))
+                                    }
+                                }
+                            });
+                        }
+                        $('#faclist').change(function () {
+                            $('#grplist').empty();
+                            $.ajax ({
+                                url: 'showspec.php',
+                                method: 'post',
+                                dataType: 'json',
+                                data: {
+                                    id: $(this).val()
+                                },
+                                success: function (data) {
+                                    $('#speclist').empty();
+                                    for (var i = 0; i < Object.keys(data).length; i++) {
+                                        $('#speclist').append( $('<option>', {
+                                            value: data[i][0],
+                                            text: data[i][1]
+                                        }))
+                                    }
+                                    changeGroups();
+                                }
+                            });
+                        });
+                        $('#speclist').change(function () {
+                            changeGroups();
+                        });
+                    </script>
+                    <br>
+                    <input class='input' name='login' type='text' placeholder='Придумайте логин' required/>
+                    <br>
+                    <input class='input' name='password' type='text' placeholder='Придумайте пароль' required/>
+                    <br>
+                    <input type='submit' value='Додати' />
+                </form>
+            </div>
+            </body>
+            </html>
+        </xmp>
+    </li>
+    <li>showspec.php:
+        <xmp>
+            <?php
+            $id = $_POST['id'];
+
+            $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+            mysqli_select_db($connection, "ecampus");
+
+            $resultSpeciality = mysqli_query($connection, "
+            SELECT speciality.idSpeciality, speciality.SpecialityName
+            FROM speciality INNER JOIN faculty ON faculty.idFaculty=speciality.fkFacultyId
+            WHERE faculty.idFaculty=".$id.";");
+
+            $arraySpeciality = mysqli_fetch_all($resultSpeciality);
+
+            echo json_encode($arraySpeciality);
+            ?>
+        </xmp>
+    </li>
+    <li>showgroup.php:
+        <xmp>
+            <?php
+            $facid = $_POST['facid'];
+            $specid = $_POST['specid'];
+
+            $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+            mysqli_select_db($connection, "ecampus");
+
+            $resultGroup = mysqli_query($connection, "
+            SELECT groups.idGroup, speciality.codeSpeciality, groups.codeGroup
+            FROM (speciality INNER JOIN faculty ON faculty.idFaculty=speciality.fkFacultyId)
+            INNER JOIN groups ON groups.fkSpecialityId = speciality.idSpeciality
+            WHERE speciality.idSpeciality=".$specid." AND faculty.idFaculty=".$facid.";");
+
+            $arrayGroup = mysqli_fetch_all($resultGroup);
+
+            echo json_encode($arrayGroup);
+            ?>
+        </xmp>
+    </li>
+</ol>
+<h3>Сайт</h3>
+<ol>
+    <li>Нас зустрічає сторінка Login:<br>
+        <img src="img/Screenshot_14.png" />
+    </li>
+    <li>Вводимо логін та пароль:<br>
+        <img src="img/Screenshot_15.png" />
+    </li>
+    <li>Натискаємо кнопку "Login". Це особистий кабінет студента:<br>
+        <img src="img/Screenshot_16.png" />
+    </li>
+    <li>Також російською мовою:<br>
+        <img src="img/Screenshot_17.png" />
+    </li>
+    <li>Також українською мовою:<br>
+        <img src="img/Screenshot_18.png" />
+    </li>
+    <li>Виходимо і бачимо, що логін та пароль збереглися у cookies:<br>
+        <img src="img/Screenshot_19.png" />
+    </li>
+    <li>Якщо введемо неіснуючі дані, то буде повідомлення:<br>
+        <img src="img/Screenshot_20.png" /><br>
+        <img src="img/Screenshot_21.png" />
+    </li>
+    <li>Код логіну:
+        <xmp>
+            <!DOCTYPE html>
+            <html lang="en-US">
+
+            <head>
+                <meta charset="UTF-8"/>
+                <title>Login</title>
+                <link rel="stylesheet" href="login.css#3">
+            </head>
+
+            <body>
+            <form action="cabinet.php" method="post">
+                <div class="container">
+                    <label for="uname"><b>Login</b></label>
+                    <input type="login" placeholder="Enter Login" name="login" required
+                    <?php
+                    if(array_key_exists("lclogin", $_COOKIE)) {
+                        echo "value='" . $_COOKIE["lclogin"] . "' style='background-color: #f5fa8e'";
+                    }
+                    ?>
+                    />
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required
+                    <?php
+                    if(array_key_exists("lcpass", $_COOKIE)) {
+                        echo "value='" . $_COOKIE["lcpass"] . "' style='background-color: #f5fa8e'";
+                    }
+                    ?>
+                    />
+
+                    <?php
+                    if (array_key_exists("incorrect", $_GET)) {
+                        if ($_GET["incorrect"] == 1) {
+                            echo "<p style='color: #ff1111;'>Incorrect login or password</p>";
+                        }
+                    }
+                    ?>
+
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            </body>
+            </html>
+        </xmp>
+    </li>
+    <li>login.css:
+        <xmp>
+            body {
+                background-color: #b4adff;
+            }
+
+            form {
+                border: 3px solid #f1f1f1;
+            }
+
+            input[type=login], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            button {
+                background-color: #04AA6D;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            .container {
+                padding: 16px;
+            }
+        </xmp>
+    </li>
+    <li>Код особистого кабінету:
+        <xmp>
+            <?php
+            session_start();
+            $language = "eng";
+            if(array_key_exists("lclang", $_COOKIE)) {
+                $language = $_COOKIE["lclang"];
+            }
+            if(array_key_exists("lang", $_GET)) {
+                $language = $_GET["lang"];
+                setcookie('lclang', $language, strtotime("+0.5 year"));
+            }
+
+            $transl = array (
+                    "ukr" => array(
+                            0 => "Інформація про студента: ",
+                            1 => "ПІБ: ",
+                            2 => "Курс: ",
+                            3 => "Факультет: ",
+                            4 => "Спеціальність: ",
+                            5 => "Група: ",
+                            6 => "Навчальні предмети: ",
+                            7 => "Назва: ",
+                            8 => "Викладач: ",
+                            9 => "Вийти",
+                            10 => "Обрати мову: "
+                            ),
+                    "ru" => array(
+                            0 => "Информация о студенте: ",
+                            1 => "ФИО: ",
+                            2 => "Курс: ",
+                            3 => "Факультет: ",
+                            4 => "Специальность: ",
+                            5 => "Группа: ",
+                            6 => "Учебные предметы: ",
+                            7 => "Название: ",
+                            8 => "Преподаватель: ",
+                            9 => "Выйти",
+                            10 => "Выбрать язык: "
+                            ),
+                    "eng" => array(
+                            0 => "Student information: ",
+                            1 => "Full name: ",
+                            2 => "Cource: ",
+                            3 => "Faculty: ",
+                            4 => "Specialty: ",
+                            5 => "Group: ",
+                            6 => "Subjects: ",
+                            7 => "Title: ",
+                            8 => "Teacher: ",
+                            9 => "Logout",
+                            10 => "Choose language: "
+                            )
+                        )
+            ?>
+
+            <!DOCTYPE html>
+            <html lang="en-US">
+
+            <head>
+                <meta charset="UTF-8"/>
+                <title>Сabinet</title>
+                <link rel="stylesheet" href="cabinet.css#8">
+            </head>
+
+            <body>
+            <div class="info">
+                <?php
+                $connection = @mysqli_connect('127.0.0.1', 'root', '') or die("Could not connect");
+                mysqli_select_db($connection, "ecampus");
+
+                $login = null;
+                if(array_key_exists("login", $_POST)) {
+                    $login = mysqli_real_escape_string($connection, $_POST["login"]);
+                } else if(array_key_exists("login", $_SESSION))
+                    $login = mysqli_real_escape_string($connection, $_SESSION["login"]);
+
+                $password = null;
+                if(array_key_exists("psw", $_POST)) {
+                    $password = mysqli_real_escape_string($connection, $_POST["psw"]);
+                } else if(array_key_exists("psw", $_SESSION))
+                    $password = mysqli_real_escape_string($connection, $_SESSION["psw"]);
+
+
+                $query1 = "SELECT `idStudent`, `fullName`, `course`, `nameFaculty`, `SpecialityName`, `codeSpeciality`, `codeGroup`
+                           FROM `faculty` RIGHT JOIN
+                           	    (`speciality` RIGHT JOIN
+                                	(`groups` RIGHT JOIN `students` ON `groups`.`idGroup` = `students`.`fkGroupId`)
+                                ON `speciality`.`idSpeciality` = `students`.`fkSpecialityId`)
+                           ON `faculty`.`idFaculty` = `students`.`fkFacultyId`
+                           WHERE `login` = '".strval($login)."' AND `password` = '".strval($password)."';";
+
+                $result1 = mysqli_query($connection, $query1);
+                $array = mysqli_fetch_all($result1);
+                $length = mysqli_num_fields($result1);
+
+                if(!count($array)) {
+                    header('Location: index.php?incorrect=1');
+                } else {
+                    setcookie('lclogin', $login, strtotime("+0.5 year"));
+                    $_SESSION['login'] = $login;
+                    setcookie('lcpass', $password, strtotime("+0.5 year"));
+                    $_SESSION['psw'] = $password;
+                }
+
+                $file = fopen("log.txt", "w");
+                $temp = "";
+                for ($i = 0; $i < count($array[0]); $i++) {
+                    $temp .= $array[0][$i]."\n";
+                }
+                fwrite($file, $temp);
+                fclose($file);
+
+                $_SESSION['lcid'] = $array[0][0];
+                $_SESSION['lcName'] = $array[0][1];
+                $_SESSION['lcCource'] = $array[0][2];
+                $_SESSION['lcFaculty'] = $array[0][3];
+                $_SESSION['lcSpeciality'] = $array[0][4];
+                $tempZero = "";
+                if ($array[0][6] < 10) {
+                    $tempZero .= "0";
+                }
+                $_SESSION['lcGroup'] = $array[0][5]."-".$tempZero.$array[0][6];
+
+                echo "
+                <div class='per-data'>
+                <h3>".$transl[$language][0]."</h3>
+                <ul>
+                    <li>".$transl[$language][1].$_SESSION['lcName']."</li>
+                    <li>".$transl[$language][2].$_SESSION['lcCource']."</li>
+                    <li>".$transl[$language][3].$_SESSION['lcFaculty']."</li>
+                    <li>".$transl[$language][4].$_SESSION['lcSpeciality']."</li>
+                    <li>".$transl[$language][5].$_SESSION['lcGroup']."</li>
+                </ul>
+            </div>";
+
+            echo "<br>";
+
+            $query2 =  "SELECT `subjectName`, `teacherName`
+            FROM `subjects` INNER JOIN `teachers` ON `subjects`.`teacherId`=`teachers`.`idteachers`;";
+
+            $result2 = mysqli_query($connection, $query2);
+            $arrayLessons = mysqli_fetch_all($result2);
+
+            echo "
+            <div class='subj'>
+                <h3>".$transl[$language][6]. "</h3>
+                <ul>";
+                    for ($i = 0; $i < count($arrayLessons); $i++) {
+                    $tempStr = "    <li> ".$transl[$language][7].$arrayLessons[$i][0].".<br>".$transl[$language][8].$arrayLessons[$i][1].".</li>";
+                    echo $tempStr;
+                    }
+                    echo "
+                </ul>
+            </div>
+            <button onclick="."location.href='index.php'>".$transl[$language][9]."
+            </button>
+            <br>
+            <p style='text-align: right'>".$transl[$language][10]."
+                <a href='cabinet.php?lang=ukr'><img src='img/ukr.png' height='10px'></a>
+                <a href='cabinet.php?lang=ru' ><img src='img/ru.png' height='10px'></a>
+                <a href='cabinet.php?lang=eng'><img src='img/eng.png' height='10px'></a>
+            </p>"
+            ?>
+            </div>
+            </body>
+            </html>
+        </xmp>
+    </li>
+    <li>cabinet.css:
+        <xmp>
+            body {
+                background-color: #b4adff;
+            }
+
+            ul {
+                list-style-type: square;
+                margin: 0;
+            }
+
+            .info {
+                border: 3px solid #f1f1f1;
+                padding: 16px;
+            }
+
+            .subj, .per-data {
+                width: 100%;
+                padding: 8px;
+                margin: 8px 0;
+                display: block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            button {
+                background-color: #04AA6D;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+        </xmp>
+    </li>
+</ol>
+</body>
+</html>
